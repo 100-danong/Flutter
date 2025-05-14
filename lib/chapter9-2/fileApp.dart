@@ -124,9 +124,18 @@ class _FileApp extends State<FileApp> {
 
   void writeFruit(String fruit) async {
     var dir = await getApplicationDocumentsDirectory();
-    var file = await File(dir.path + '/fruit.txt').readAsString();
-    file = file + '\n' + fruit;
-    File(dir.path + '/fruit.txt').writeAsStringSync(file);
+    var filePath = '${dir.path}/fruit.txt';
+    var file = File(filePath);
+
+    String existing = '';
+    if (await file.exists()) {
+      existing = await file.readAsString();
+    }
+
+    // 새 줄로 추가
+    String updated = existing.trim() + '\n' + fruit.trim();
+
+    await file.writeAsString(updated); // <-- async/await 방식으로 통일
   }
 
 

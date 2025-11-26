@@ -16,7 +16,6 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: LargeFileMain(),
-      //테스트용 주석 추가
     );
   }
 }
